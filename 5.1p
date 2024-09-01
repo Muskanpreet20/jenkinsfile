@@ -1,43 +1,49 @@
 pipeline {
     agent any
+    
     environment {
-        DIRECTORY_PATH = '/path/to/code'
-        TESTING_ENVIRONMENT = 'TestingEnv'
-        PRODUCTION_ENVIRONMENT = 'MuskansProd'
+        DIRECTORY_PATH = '/path/to/your/code' // Replace with the actual directory path
+        TESTING_ENVIRONMENT = 'TestEnv'
+        PRODUCTION_ENVIRONMENT = 'ProfessionalPracticeProd' // Use your name for the production environment
     }
+
     stages {
         stage('Build') {
             steps {
-                echo "fetch the source code from the directory path specified by the environment variable"
-                echo "compile the code and generate any necessary artifacts"
+                echo "Fetching the source code from the directory path specified by the environment variable: ${env.DIRECTORY_PATH}"
+                echo "Compile the code and generate any necessary artifacts"
             }
         }
+        
         stage('Test') {
             steps {
-                echo "unit tests"
-                echo "integration tests"
+                echo "Running unit tests"
+                echo "Running integration tests"
             }
         }
+        
         stage('Code Quality Check') {
             steps {
-                echo "check the quality of the code"
+                echo "Checking the quality of the code"
             }
         }
+        
         stage('Deploy') {
             steps {
-                echo "deploy the application to a testing environment specified by the environment variable"
+                echo "Deploying the application to the testing environment specified by the environment variable: ${env.TESTING_ENVIRONMENT}"
             }
         }
+        
         stage('Approval') {
             steps {
-                script {
-                    sleep time: 10, unit: 'SECONDS'
-                }
+                echo "Waiting for manual approval..."
+                sleep(time: 10, unit: 'SECONDS') // Simulates manual approval
             }
         }
+        
         stage('Deploy to Production') {
             steps {
-                echo "deploy the code to the production environment ${PRODUCTION_ENVIRONMENT}"
+                echo "Deploying the code to the production environment using the environment variable: ${env.PRODUCTION_ENVIRONMENT}"
             }
         }
     }
