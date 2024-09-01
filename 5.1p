@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    
+
     environment {
-        DIRECTORY_PATH = '/path/to/your/code' // Replace with the actual directory path
+        DIRECTORY_PATH = 'https://github.com/Muskanpreet20/jenkinsfile/blob/main/5.1p'
         TESTING_ENVIRONMENT = 'TestEnv'
-        PRODUCTION_ENVIRONMENT = 'ProfessionalPracticeProd' // Use your name for the production environment
+        PRODUCTION_ENVIRONMENT = 'MuskanpreetProd'
     }
 
     stages {
@@ -14,36 +14,35 @@ pipeline {
                 echo "Compile the code and generate any necessary artifacts"
             }
         }
-        
+
         stage('Test') {
             steps {
                 echo "Running unit tests"
                 echo "Running integration tests"
             }
         }
-        
+
         stage('Code Quality Check') {
             steps {
-                echo "Checking the quality of the code"
+                echo "Performing code quality checks"
             }
         }
-        
+
         stage('Deploy') {
             steps {
-                echo "Deploying the application to the testing environment specified by the environment variable: ${env.TESTING_ENVIRONMENT}"
+                echo "Deploying to the ${env.TESTING_ENVIRONMENT} environment"
             }
         }
-        
+
         stage('Approval') {
             steps {
-                echo "Waiting for manual approval..."
-                sleep(time: 10, unit: 'SECONDS') // Simulates manual approval
+                echo "Awaiting approval for production deployment"
             }
         }
-        
+
         stage('Deploy to Production') {
             steps {
-                echo "Deploying the code to the production environment using the environment variable: ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploying to the ${env.PRODUCTION_ENVIRONMENT} environment"
             }
         }
     }
